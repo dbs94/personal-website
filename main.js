@@ -15,6 +15,8 @@ const loadComponent = async (url, elementId) => {
     }
 };
 
+
+// --- NAVIGATION LINKS ---
 // This function sets the navigation links and active states based on the current page.
 const configureNavigation = () => {
     const pageId = document.body.id;
@@ -30,19 +32,23 @@ const configureNavigation = () => {
         return;
     }
 
+    // --- NAVIGATION LINKS HERE ---
     // Set the content and links for each link based on the page's ID
     switch (pageId) {
+
+        // --- HOME PAGE ---
         case 'page-home':
             navTopLeft.textContent = 'ART';
             navTopLeft.href = 'art.html';
             navTopRight.textContent = 'ABOUT';
-            navTopRight.href = 'about.html'; // UPDATED
+            navTopRight.href = 'about.html';
             navBottomLeft.textContent = 'BLOG';
             navBottomLeft.href = 'blog.html';
             navBottomRight.textContent = 'OTHER';
             navBottomRight.href = 'index.html';
             break;
 
+        // --- ART HOME PAGE ---
         case 'page-art-gallery':
             navTopLeft.textContent = 'ART';
             navTopLeft.href = 'art.html';
@@ -55,6 +61,7 @@ const configureNavigation = () => {
             navBottomRight.href = 'index.html';
             break;
 
+        // --- ART DETAIL TEMPLATE PAGE ---
         case 'page-art-detail':
             navTopLeft.textContent = 'ART';
             navTopLeft.href = 'art.html';
@@ -67,6 +74,7 @@ const configureNavigation = () => {
             navBottomRight.href = '#';
             break;
 
+        // --- BLOG HOME PAGE ---
         case 'page-blog-gallery':
             navTopLeft.textContent = 'ART';
             navTopLeft.href = 'art.html';
@@ -79,6 +87,7 @@ const configureNavigation = () => {
             navBottomRight.href = 'index.html';
             break;
 
+        // --- BLOG POST TEMPLATE PAGE ---
         case 'page-blog-post':
             navTopLeft.textContent = 'BLOG';
             navTopLeft.href = 'blog.html';
@@ -90,7 +99,7 @@ const configureNavigation = () => {
             navBottomRight.href = '#';
             break;
 
-        // --- NEW CASE FOR THE ABOUT PAGE ---
+        // --- ABOUT PAGE ---
         case 'page-about':
             navTopLeft.textContent = 'ART';
             navTopLeft.href = 'art.html';
@@ -104,6 +113,7 @@ const configureNavigation = () => {
             break;
     }
 };
+
 
 // When the page loads, load the components and then configure them.
 document.addEventListener('DOMContentLoaded', async () => {
