@@ -16,7 +16,9 @@ const loadComponent = async (url, elementId) => {
 };
 
 
-// --- NAVIGATION LINKS ---
+// ==========================
+//  --- NAVIGATION LINKS ---
+// ==========================
 // This function sets the navigation links and active states based on the current page.
 const configureNavigation = () => {
     const pageId = document.body.id;
@@ -32,11 +34,15 @@ const configureNavigation = () => {
         return;
     }
 
-    // --- NAVIGATION LINKS HERE ---
+// =================================
+//  --- NAVIGATION LINKS SET-UP ---
+// =================================
     // Set the content and links for each link based on the page's ID
     switch (pageId) {
 
-        // --- HOME PAGE ---
+    // =====================
+    //  --- HOME PAGE ---
+    // =====================
         case 'page-home':
             navTopLeft.textContent = 'ART';
             navTopLeft.href = 'art.html';
@@ -48,7 +54,9 @@ const configureNavigation = () => {
             navBottomRight.href = 'index.html';
             break;
 
-        // --- ART HOME PAGE ---
+    // =======================
+    //  --- ART HOME PAGE ---
+    // =======================
         case 'page-art-gallery':
             navTopLeft.textContent = 'ART';
             navTopLeft.href = 'art.html';
@@ -59,6 +67,51 @@ const configureNavigation = () => {
             navBottomLeft.href = 'blog.html';
             navBottomRight.textContent = 'OTHER';
             navBottomRight.href = 'index.html';
+            break;
+
+    // ==================
+    //  --- F24 PAGE ---
+    // ==================
+        case 'page-art-f24':
+            navTopLeft.textContent = 'ART';
+            navTopLeft.href = 'art.html';
+            navTopRight.textContent = 'F24';
+            navTopRight.href = '#';
+            navTopRight.classList.add('active');
+            navBottomLeft.textContent = 'PREVIOUS';
+            navBottomLeft.href = '#';
+            navBottomRight.textContent = 'NEXT';
+            navBottomRight.href = '#';
+            break;
+
+    // ==========================
+    //  --- WAX ON PAPER PAGE ---
+    // ==========================
+        case 'page-art-f24':
+            navTopLeft.textContent = 'ART';
+            navTopLeft.href = 'art.html';
+            navTopRight.textContent = 'F24';
+            navTopRight.href = '#';
+            navTopRight.classList.add('active');
+            navBottomLeft.textContent = 'PREVIOUS';
+            navBottomLeft.href = '#';
+            navBottomRight.textContent = 'NEXT';
+            navBottomRight.href = '#';
+            break;
+
+    // =============================
+    //  --- BREAKING POINTS PAGE ---
+    // =============================
+        case 'page-art-breaking-points':
+            navTopLeft.textContent = 'ART';
+            navTopLeft.href = 'art.html';
+            navTopRight.textContent = 'F24';
+            navTopRight.href = '#';
+            navTopRight.classList.add('active');
+            navBottomLeft.textContent = 'PREVIOUS';
+            navBottomLeft.href = '#';
+            navBottomRight.textContent = 'NEXT';
+            navBottomRight.href = 'sm24.html';
             break;
 
         // --- ART DETAIL TEMPLATE PAGE ---
@@ -74,7 +127,9 @@ const configureNavigation = () => {
             navBottomRight.href = '#';
             break;
 
-        // --- BLOG HOME PAGE ---
+    // ========================
+    //  --- BLOG HOME PAGE ---
+    // ========================
         case 'page-blog-gallery':
             navTopLeft.textContent = 'ART';
             navTopLeft.href = 'art.html';
@@ -99,7 +154,9 @@ const configureNavigation = () => {
             navBottomRight.href = '#';
             break;
 
-        // --- ABOUT PAGE ---
+    // =====================
+    //  --- ABOUT PAGE ---
+    // =====================
         case 'page-about':
             navTopLeft.textContent = 'ART';
             navTopLeft.href = 'art.html';
