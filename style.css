@@ -96,7 +96,7 @@ body.homepage {
 
 .grid-item {
     position: relative;
-    aspect-ratio: 4 / 6; /* Aspect Ratio */
+    aspect-ratio: 3 / 4; /* Aspect Ratio */
     transition: transform 0.3s ease, opacity 0.3s ease, filter 0.3s ease;
 }
 
