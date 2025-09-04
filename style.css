@@ -76,9 +76,9 @@ body.homepage {
 
 .central-artwork {
     max-height: 80vh;
-    width: auto;
+    width: 80vw;
+    object-fit: cover;
     display: block;
-    transform: translateX(2%);
 }
 
 /* =================================
@@ -353,8 +353,10 @@ body.homepage {
 /* General Mobile Styles */
 @media (max-width: 768px) {
     .central-artwork {
-        max-height: 75vh;
-        transform: translateX(4%);
+        max-height: 80vh;
+        width: 90vw;
+        object-fit: cover;
+        display: block;
     }
 
     .nav-bar {
