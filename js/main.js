@@ -59,14 +59,14 @@ const configureNavigation = () => {
     // =======================
         case 'page-art-gallery':
             navTopLeft.textContent = 'ART';
-            navTopLeft.href = 'art.html';
+            navTopLeft.href = 'index.html';
             navTopLeft.classList.add('active');
             navTopRight.textContent = 'ABOUT';
-            navTopRight.href = 'pages/about.html'; // UPDATED
+            navTopRight.href = '/pages/about.html';
             navBottomLeft.textContent = 'BLOG';
-            navBottomLeft.href = 'blog.html';
+            navBottomLeft.href = '/pages/blog/index.html';
             navBottomRight.textContent = 'OTHER';
-            navBottomRight.href = 'index.html';
+            navBottomRight.href = '/index.html';
             break;
 
     // ======================
@@ -162,14 +162,14 @@ const configureNavigation = () => {
     // ========================
         case 'page-blog-gallery':
             navTopLeft.textContent = 'ART';
-            navTopLeft.href = 'art.html';
+            navTopLeft.href = '/pages/art/index.html';
             navTopRight.textContent = 'ABOUT';
-            navTopRight.href = 'about.html'; // UPDATED
+            navTopRight.href = '/pages/about.html'; // UPDATED
             navBottomLeft.textContent = 'BLOG';
-            navBottomLeft.href = 'blog.html';
+            navBottomLeft.href = 'index.html';
             navBottomLeft.classList.add('active');
             navBottomRight.textContent = 'OTHER';
-            navBottomRight.href = 'index.html';
+            navBottomRight.href = '/index.html';
             break;
 
         // --- BLOG POST TEMPLATE PAGE ---
@@ -189,14 +189,14 @@ const configureNavigation = () => {
     // =====================
         case 'page-about':
             navTopLeft.textContent = 'ART';
-            navTopLeft.href = '/pages/art/art.html';
+            navTopLeft.href = '/pages/art/index.html';
             navTopRight.textContent = 'ABOUT';
             navTopRight.href = 'about.html';
-            navTopRight.classList.add('active'); // Set active style
+            navTopRight.classList.add('active');
             navBottomLeft.textContent = 'BLOG';
-            navBottomLeft.href = 'blog.html';
+            navBottomLeft.href = 'blog/index.html';
             navBottomRight.textContent = 'OTHER';
-            navBottomRight.href = 'index.html';
+            navBottomRight.href = '/index.html';
             break;
     }
 };
