@@ -81,22 +81,22 @@ const configureNavigation = () => {
             navBottomLeft.textContent = 'PREVIOUS';
             navBottomLeft.href = '#';
             navBottomRight.textContent = 'NEXT';
-            navBottomRight.href = '#';
+            navBottomRight.href = 'wax-on-paper.html';
             break;
 
     // ==========================
     //  --- WAX ON PAPER PAGE ---
     // ==========================
-        case 'page-art-f24':
+        case 'page-art-wax-on-paper':
             navTopLeft.textContent = 'ART';
             navTopLeft.href = 'art.html';
             navTopRight.textContent = 'F24';
             navTopRight.href = '#';
             navTopRight.classList.add('active');
             navBottomLeft.textContent = 'PREVIOUS';
-            navBottomLeft.href = '#';
+            navBottomLeft.href = 'f24.html';
             navBottomRight.textContent = 'NEXT';
-            navBottomRight.href = '#';
+            navBottomRight.href = 'breaking-points.html';
             break;
 
     // =============================
@@ -109,9 +109,24 @@ const configureNavigation = () => {
             navTopRight.href = '#';
             navTopRight.classList.add('active');
             navBottomLeft.textContent = 'PREVIOUS';
-            navBottomLeft.href = '#';
+            navBottomLeft.href = 'wax-on-paper.html';
             navBottomRight.textContent = 'NEXT';
             navBottomRight.href = 'sm24.html';
+            break;
+
+    // =============================
+    //       --- SM24 PAGE ---
+    // =============================
+        case 'page-art-sm24':
+            navTopLeft.textContent = 'ART';
+            navTopLeft.href = 'art.html';
+            navTopRight.textContent = 'F24';
+            navTopRight.href = '#';
+            navTopRight.classList.add('active');
+            navBottomLeft.textContent = 'PREVIOUS';
+            navBottomLeft.href = 'breaking-points.html';
+            navBottomRight.textContent = 'NEXT';
+            navBottomRight.href = 'x.html';
             break;
 
         // --- ART DETAIL TEMPLATE PAGE ---
