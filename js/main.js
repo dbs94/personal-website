@@ -74,7 +74,7 @@ const configureNavigation = () => {
     // ======================
         case 'page-art-f24':
             navTopLeft.textContent = 'ART';
-            navTopLeft.href = 'art.html';
+            navTopLeft.href = 'index.html';
             navTopRight.textContent = 'F24';
             navTopRight.href = '#';
             navTopRight.classList.add('active');
@@ -89,7 +89,7 @@ const configureNavigation = () => {
     // ==========================
         case 'page-art-wax-on-paper':
             navTopLeft.textContent = 'ART';
-            navTopLeft.href = 'art.html';
+            navTopLeft.href = 'index.html';
             navTopRight.textContent = 'F24';
             navTopRight.href = '#';
             navTopRight.classList.add('active');
@@ -104,7 +104,7 @@ const configureNavigation = () => {
     // =============================
         case 'page-art-breaking-points':
             navTopLeft.textContent = 'ART';
-            navTopLeft.href = 'art.html';
+            navTopLeft.href = 'index.html';
             navTopRight.textContent = 'F24';
             navTopRight.href = '#';
             navTopRight.classList.add('active');
@@ -119,7 +119,7 @@ const configureNavigation = () => {
     // =============================
         case 'page-art-sm24':
             navTopLeft.textContent = 'ART';
-            navTopLeft.href = 'art.html';
+            navTopLeft.href = 'index.html';
             navTopRight.textContent = 'F24';
             navTopRight.href = '#';
             navTopRight.classList.add('active');
@@ -134,7 +134,7 @@ const configureNavigation = () => {
     // =============================
         case 'page-art-06oct24':
             navTopLeft.textContent = 'ART';
-            navTopLeft.href = 'art.html';
+            navTopLeft.href = 'index.html';
             navTopRight.textContent = 'F24';
             navTopRight.href = '#';
             navTopRight.classList.add('active');
@@ -147,7 +147,7 @@ const configureNavigation = () => {
         // --- ART DETAIL TEMPLATE PAGE ---
         case 'page-art-detail':
             navTopLeft.textContent = 'ART';
-            navTopLeft.href = 'art.html';
+            navTopLeft.href = 'index.html';
             navTopRight.textContent = 'F24';
             navTopRight.href = '#';
             navTopRight.classList.add('active');
