@@ -290,7 +290,8 @@ body.homepage {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: var(--spacing-xxl);
+    row-gap: var(--spacing-m);
+    column-gap: var(--spacing-xxl);
     min-height: calc(100vh - (var(--nav-bar-height) * 2));
 }
 .about-image-column,
