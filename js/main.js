@@ -45,11 +45,11 @@ const configureNavigation = () => {
     // =====================
         case 'page-home':
             navTopLeft.textContent = 'ART';
-            navTopLeft.href = 'art.html';
+            navTopLeft.href = 'pages/art/index.html';
             navTopRight.textContent = 'ABOUT';
             navTopRight.href = 'pages/about.html';
             navBottomLeft.textContent = 'BLOG';
-            navBottomLeft.href = 'blog.html';
+            navBottomLeft.href = 'pages/blog/index.html';
             navBottomRight.textContent = 'OTHER';
             navBottomRight.href = 'index.html';
             break;
