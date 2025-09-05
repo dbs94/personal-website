@@ -47,7 +47,7 @@ const configureNavigation = () => {
             navTopLeft.textContent = 'ART';
             navTopLeft.href = 'art.html';
             navTopRight.textContent = 'ABOUT';
-            navTopRight.href = 'about.html';
+            navTopRight.href = 'pages/about.html';
             navBottomLeft.textContent = 'BLOG';
             navBottomLeft.href = 'blog.html';
             navBottomRight.textContent = 'OTHER';
@@ -62,7 +62,7 @@ const configureNavigation = () => {
             navTopLeft.href = 'art.html';
             navTopLeft.classList.add('active');
             navTopRight.textContent = 'ABOUT';
-            navTopRight.href = 'about.html'; // UPDATED
+            navTopRight.href = 'pages/about.html'; // UPDATED
             navBottomLeft.textContent = 'BLOG';
             navBottomLeft.href = 'blog.html';
             navBottomRight.textContent = 'OTHER';
@@ -189,7 +189,7 @@ const configureNavigation = () => {
     // =====================
         case 'page-about':
             navTopLeft.textContent = 'ART';
-            navTopLeft.href = 'art.html';
+            navTopLeft.href = '/pages/art/art.html';
             navTopRight.textContent = 'ABOUT';
             navTopRight.href = 'about.html';
             navTopRight.classList.add('active'); // Set active style
@@ -204,8 +204,8 @@ const configureNavigation = () => {
 
 // When the page loads, load the components and then configure them.
 document.addEventListener('DOMContentLoaded', async () => {
-    await loadComponent('components/_header.html', 'header-placeholder');
-    await loadComponent('components/_footer.html', 'footer-placeholder');
+    await loadComponent('/components/_header.html', 'header-placeholder');
+    await loadComponent('/components/_footer.html', 'footer-placeholder');
     
     // Once the HTML is loaded, run the function to set the correct links
     configureNavigation();
