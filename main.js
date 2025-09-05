@@ -69,9 +69,9 @@ const configureNavigation = () => {
             navBottomRight.href = 'index.html';
             break;
 
-    // ==================
-    //  --- F24 PAGE ---
-    // ==================
+    // ======================
+    //    --- F24 PAGE ---
+    // ======================
         case 'page-art-f24':
             navTopLeft.textContent = 'ART';
             navTopLeft.href = 'art.html';
@@ -79,7 +79,7 @@ const configureNavigation = () => {
             navTopRight.href = '#';
             navTopRight.classList.add('active');
             navBottomLeft.textContent = 'PREVIOUS';
-            navBottomLeft.href = '#';
+            navBottomLeft.href = '06oct24.html';
             navBottomRight.textContent = 'NEXT';
             navBottomRight.href = 'wax-on-paper.html';
             break;
@@ -126,7 +126,22 @@ const configureNavigation = () => {
             navBottomLeft.textContent = 'PREVIOUS';
             navBottomLeft.href = 'breaking-points.html';
             navBottomRight.textContent = 'NEXT';
-            navBottomRight.href = 'x.html';
+            navBottomRight.href = '06oct24.html';
+            break;
+
+    // =============================
+    //     --- 06OCT24 PAGE ---
+    // =============================
+        case 'page-art-06oct24':
+            navTopLeft.textContent = 'ART';
+            navTopLeft.href = 'art.html';
+            navTopRight.textContent = 'F24';
+            navTopRight.href = '#';
+            navTopRight.classList.add('active');
+            navBottomLeft.textContent = 'PREVIOUS';
+            navBottomLeft.href = 'sm24.html';
+            navBottomRight.textContent = 'NEXT';
+            navBottomRight.href = 'f24.html';
             break;
 
         // --- ART DETAIL TEMPLATE PAGE ---
