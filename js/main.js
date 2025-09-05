@@ -204,8 +204,8 @@ const configureNavigation = () => {
 
 // When the page loads, load the components and then configure them.
 document.addEventListener('DOMContentLoaded', async () => {
-    await loadComponent('_header.html', 'header-placeholder');
-    await loadComponent('_footer.html', 'footer-placeholder');
+    await loadComponent('components/_header.html', 'header-placeholder');
+    await loadComponent('components/_footer.html', 'footer-placeholder');
     
     // Once the HTML is loaded, run the function to set the correct links
     configureNavigation();
