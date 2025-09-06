@@ -1,4 +1,3 @@
-
 const loadComponent = async (url, elementId) => {
     try {
         const response = await fetch(url);
@@ -21,88 +20,47 @@ const loadComponent = async (url, elementId) => {
 // --- NAVIGATION CONFIGURATION ---
 // ======================================
 
+// The one true order for all art series pages
+const artSeriesOrder = [
+    'f24',
+    'wax-on-paper',
+    'breaking-points',
+    'sm24',
+    '06oct24'
+];
+
+// Simplified navConfig, with all repetitive art series pages removed
 const navConfig = {
-    
-    // HOME PAGE
     'page-home': {
         topLeft: { text: 'ART', href: '/pages/art/index.html' },
         topRight: { text: 'ABOUT', href: '/pages/about.html' },
         bottomLeft: { text: 'BLOG', href: '/pages/blog/index.html' },
         bottomRight: { text: 'OTHER', href: '/index.html' },
     },
-
-    // ART HOME PAGE
     'page-art-gallery': {
         topLeft: { text: 'ART', href: '/pages/art/index.html', active: true },
         topRight: { text: 'ABOUT', href: '/pages/about.html' },
         bottomLeft: { text: 'BLOG', href: '/pages/blog/index.html' },
         bottomRight: { text: 'OTHER', href: '/index.html' },
     },
-
-    // F24 ART SERIES
-    'page-art-f24': {
-        topLeft: { text: 'ART', href: '/pages/art/index.html' },
-        topRight: { text: 'F24', href: '#', active: true },
-        bottomLeft: { text: 'PREVIOUS', href: '06oct24.html' },
-        bottomRight: { text: 'NEXT', href: 'wax-on-paper.html' },
-    },
-
-    // WAX ON PAPER ART SERIES
-    'page-art-wax-on-paper': {
-        topLeft: { text: 'ART', href: '/pages/art/index.html' },
-        topRight: { text: 'F24', href: '#', active: true },
-        bottomLeft: { text: 'PREVIOUS', href: 'f24.html' },
-        bottomRight: { text: 'NEXT', href: 'breaking-points.html' },
-    },
-
-    // BREAKING POINTS ART SERIES
-    'page-art-breaking-points': {
-        topLeft: { text: 'ART', href: '/pages/art/index.html' },
-        topRight: { text: 'F24', href: '#', active: true },
-        bottomLeft: { text: 'PREVIOUS', href: 'wax-on-paper.html' },
-        bottomRight: { text: 'NEXT', href: 'sm24.html' },
-    },
-
-    // SM24 ART SERIES
-    'page-art-sm24': {
-        topLeft: { text: 'ART', href: '/pages/art/index.html' },
-        topRight: { text: 'F24', href: '#', active: true },
-        bottomLeft: { text: 'PREVIOUS', href: 'breaking-points.html' },
-        bottomRight: { text: 'NEXT', href: '06oct24.html' },
-    },
-
-    // 06OCT24 ART SERIES
-    'page-art-06oct24': {
-        topLeft: { text: 'ART', href: '/pages/art/index.html' },
-        topRight: { text: 'F24', href: '#', active: true },
-        bottomLeft: { text: 'PREVIOUS', href: 'sm24.html' },
-        bottomRight: { text: 'NEXT', href: 'f24.html' },
-    },
-
-    // BLOG HOME PAGE
     'page-blog-gallery': {
         topLeft: { text: 'ART', href: '/pages/art/index.html' },
         topRight: { text: 'ABOUT', href: '/pages/about.html' },
         bottomLeft: { text: 'BLOG', href: '/pages/blog/index.html', active: true },
         bottomRight: { text: 'OTHER', href: '/index.html' },
     },
-
-        // BLOG POST PAGE
     'page-blog-post': {
         topLeft: { text: 'ART', href: '/pages/art/index.html' },
         topRight: { text: 'ABOUT', href: '/pages/about.html' },
         bottomLeft: { text: 'BLOG', href: '/pages/blog/index.html', active: true },
         bottomRight: { text: 'OTHER', href: '/index.html' },
     },
-
-    // ABOUT ME PAGE
     'page-about': {
         topLeft: { text: 'ART', href: '/pages/art/index.html' },
         topRight: { text: 'ABOUT', href: '/pages/about.html', active: true },
         bottomLeft: { text: 'BLOG', href: '/pages/blog/index.html' },
         bottomRight: { text: 'OTHER', href: '/index.html' },
     }
-
 };
 
 // ==============================
@@ -111,13 +69,37 @@ const navConfig = {
 
 const configureNavigation = () => {
     const pageId = document.body.id;
-    const pageConfig = navConfig[pageId];
+    let pageConfig; // Use 'let' so we can modify it
+
+    // --- NEW: DYNAMIC LOGIC FOR ART SERIES PAGES ---
+   if (pageId && pageId.startsWith('page-art-') && pageId !== 'page-art-gallery') {
+        const currentSlug = pageId.replace('page-art-', '');
+        const currentIndex = artSeriesOrder.indexOf(currentSlug);
+
+        if (currentIndex !== -1) {
+            const prevIndex = (currentIndex - 1 + artSeriesOrder.length) % artSeriesOrder.length;
+            const nextIndex = (currentIndex + 1) % artSeriesOrder.length;
+
+            const prevSlug = artSeriesOrder[prevIndex];
+            const nextSlug = artSeriesOrder[nextIndex];
+
+            // Dynamically build the configuration for this art page
+            pageConfig = {
+                topLeft: { text: 'ART', href: '/pages/art/index.html' },
+                topRight: { text: currentSlug.toUpperCase(), href: '#', active: true },
+                bottomLeft: { text: 'PREVIOUS', href: `/pages/art/${prevSlug}.html` },
+                bottomRight: { text: 'NEXT', href: `/pages/art/${nextSlug}.html` }
+            };
+        }
+    } else {
+        // --- ORIGINAL LOGIC for all other pages ---
+        pageConfig = navConfig[pageId];
+    }
 
     if (!pageConfig) {
         console.warn(`No navigation configuration found for page ID: ${pageId}`);
         return;
     }
-
     
     const updateLink = (elementId, linkConfig) => {
         const element = document.getElementById(elementId);
@@ -136,15 +118,11 @@ const configureNavigation = () => {
     updateLink('nav-bottom-right', pageConfig.bottomRight);
 };
 
-
-
 document.addEventListener('DOMContentLoaded', async () => {
-    
     await Promise.all([
         loadComponent('/components/_header.html', 'header-placeholder'),
         loadComponent('/components/_footer.html', 'footer-placeholder')
     ]);
 
-    
     configureNavigation();
 });
