@@ -30,13 +30,6 @@ const artSeriesOrder = [
     '06oct24'
 ];
 
-// Blog posts order
-const blogPostOrder = [
-    // Add new blog post slugs here as I write them
-    'blog-post-template',
-    'finding-inspiration',
-    'a-look-at-f24'
-];
 
 // navConfig
 const navConfig = {
@@ -71,6 +64,14 @@ const navConfig = {
 // ==============================
 
 const configureNavigation = () => {
+
+    let blogPostOrder = [];
+    if (typeof blogPosts !== 'undefined') {
+        // Sort by date to ensure "previous" and "next" are chronological
+        const sortedPosts = blogPosts.sort((a, b) => new Date(a.date) - new Date(b.date));
+        blogPostOrder = sortedPosts.map(post => post.slug);
+    }
+
     const pageId = document.body.id;
     let pageConfig;
 
