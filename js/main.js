@@ -86,7 +86,7 @@ const configureNavigation = () => {
 
             pageConfig = {
                 topLeft: { text: 'ART', href: '/pages/art/index.html' },
-                topRight: { text: currentSlug.toUpperCase().replace('-', ' '), href: '#', active: true },
+                topRight: { text: currentSlug.toUpperCase().replace(/-/g, ' '), href: '#', active: true },
                 bottomLeft: { text: 'PREVIOUS', href: `/pages/art/${prevSlug}.html` },
                 bottomRight: { text: 'NEXT', href: `/pages/art/${nextSlug}.html` }
             };
@@ -105,7 +105,7 @@ const configureNavigation = () => {
 
             pageConfig = {
                 topLeft: { text: 'BLOG', href: '/pages/blog/index.html' },
-                topRight: { text: currentSlug.toUpperCase().replace('-', ' '), href: '#', active: true },
+                topRight: { text: currentSlug.toUpperCase().replace(/-/g, ' '), href: '#', active: true },
                 bottomLeft: { text: 'PREVIOUS POST', href: `/pages/blog/posts/${prevSlug}.html` },
                 bottomRight: { text: 'NEXT POST', href: `/pages/blog/posts/${nextSlug}.html` }
             };
