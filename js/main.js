@@ -22,6 +22,7 @@ const loadComponent = async (url, elementId) => {
 
 // Art series order
 const artSeriesOrder = [
+    // Add new art slugs here as I make them
     'f24',
     'wax-on-paper',
     'breaking-points',
@@ -29,15 +30,15 @@ const artSeriesOrder = [
     '06oct24'
 ];
 
-// Blog post order
+// Blog posts order
 const blogPostOrder = [
+    // Add new blog post slugs here as I write them
     'blog-post-template',
     'finding-inspiration',
     'a-look-at-f24'
-    // Add new blog post slugs here as you write them
 ];
 
-// Simplified navConfig, with all dynamic pages removed
+// navConfig
 const navConfig = {
     'page-home': {
         topLeft: { text: 'ART', href: '/pages/art/index.html' },
@@ -92,7 +93,7 @@ const configureNavigation = () => {
             };
         }
     
-    // NEW: Dynamic logic for Blog Post pages
+    // Dynamic logic for Blog Post pages
     } else if (pageId && pageId.startsWith('page-blog-') && pageId !== 'page-blog-gallery') {
         const currentSlug = pageId.replace('page-blog-', '');
         const currentIndex = blogPostOrder.indexOf(currentSlug);
