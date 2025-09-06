@@ -25,15 +25,15 @@ const navConfig = {
     
     // HOME PAGE
     'page-home': {
-        topLeft: { text: 'ART', href: 'pages/art/index.html' },
-        topRight: { text: 'ABOUT', href: 'pages/about.html' },
-        bottomLeft: { text: 'BLOG', href: 'pages/blog/index.html' },
-        bottomRight: { text: 'OTHER', href: 'index.html' },
+        topLeft: { text: 'ART', href: '/pages/art/index.html' },
+        topRight: { text: 'ABOUT', href: '/pages/about.html' },
+        bottomLeft: { text: 'BLOG', href: '/pages/blog/index.html' },
+        bottomRight: { text: 'OTHER', href: '/index.html' },
     },
 
     // ART HOME PAGE
     'page-art-gallery': {
-        topLeft: { text: 'ART', href: 'index.html', active: true },
+        topLeft: { text: 'ART', href: '/pages/art/index.html', active: true },
         topRight: { text: 'ABOUT', href: '/pages/about.html' },
         bottomLeft: { text: 'BLOG', href: '/pages/blog/index.html' },
         bottomRight: { text: 'OTHER', href: '/index.html' },
@@ -41,7 +41,7 @@ const navConfig = {
 
     // F24 ART SERIES
     'page-art-f24': {
-        topLeft: { text: 'ART', href: 'index.html' },
+        topLeft: { text: 'ART', href: '/pages/art/index.html' },
         topRight: { text: 'F24', href: '#', active: true },
         bottomLeft: { text: 'PREVIOUS', href: '06oct24.html' },
         bottomRight: { text: 'NEXT', href: 'wax-on-paper.html' },
@@ -49,7 +49,7 @@ const navConfig = {
 
     // WAX ON PAPER ART SERIES
     'page-art-wax-on-paper': {
-        topLeft: { text: 'ART', href: 'index.html' },
+        topLeft: { text: 'ART', href: '/pages/art/index.html' },
         topRight: { text: 'F24', href: '#', active: true },
         bottomLeft: { text: 'PREVIOUS', href: 'f24.html' },
         bottomRight: { text: 'NEXT', href: 'breaking-points.html' },
@@ -57,7 +57,7 @@ const navConfig = {
 
     // BREAKING POINTS ART SERIES
     'page-art-breaking-points': {
-        topLeft: { text: 'ART', href: 'index.html' },
+        topLeft: { text: 'ART', href: '/pages/art/index.html' },
         topRight: { text: 'F24', href: '#', active: true },
         bottomLeft: { text: 'PREVIOUS', href: 'wax-on-paper.html' },
         bottomRight: { text: 'NEXT', href: 'sm24.html' },
@@ -65,7 +65,7 @@ const navConfig = {
 
     // SM24 ART SERIES
     'page-art-sm24': {
-        topLeft: { text: 'ART', href: 'index.html' },
+        topLeft: { text: 'ART', href: '/pages/art/index.html' },
         topRight: { text: 'F24', href: '#', active: true },
         bottomLeft: { text: 'PREVIOUS', href: 'breaking-points.html' },
         bottomRight: { text: 'NEXT', href: '06oct24.html' },
@@ -73,7 +73,7 @@ const navConfig = {
 
     // 06OCT24 ART SERIES
     'page-art-06oct24': {
-        topLeft: { text: 'ART', href: 'index.html' },
+        topLeft: { text: 'ART', href: '/pages/art/index.html' },
         topRight: { text: 'F24', href: '#', active: true },
         bottomLeft: { text: 'PREVIOUS', href: 'sm24.html' },
         bottomRight: { text: 'NEXT', href: 'f24.html' },
@@ -83,15 +83,23 @@ const navConfig = {
     'page-blog-gallery': {
         topLeft: { text: 'ART', href: '/pages/art/index.html' },
         topRight: { text: 'ABOUT', href: '/pages/about.html' },
-        bottomLeft: { text: 'BLOG', href: 'index.html', active: true },
+        bottomLeft: { text: 'BLOG', href: '/pages/blog/index.html', active: true },
+        bottomRight: { text: 'OTHER', href: '/index.html' },
+    },
+
+        // BLOG POST PAGE
+    'page-blog-post': {
+        topLeft: { text: 'ART', href: '/pages/art/index.html' },
+        topRight: { text: 'ABOUT', href: '/pages/about.html' },
+        bottomLeft: { text: 'BLOG', href: '/pages/blog/index.html', active: true },
         bottomRight: { text: 'OTHER', href: '/index.html' },
     },
 
     // ABOUT ME PAGE
     'page-about': {
         topLeft: { text: 'ART', href: '/pages/art/index.html' },
-        topRight: { text: 'ABOUT', href: 'about.html', active: true },
-        bottomLeft: { text: 'BLOG', href: 'blog/index.html' },
+        topRight: { text: 'ABOUT', href: '/pages/about.html', active: true },
+        bottomLeft: { text: 'BLOG', href: '/pages/blog/index.html' },
         bottomRight: { text: 'OTHER', href: '/index.html' },
     }
 
