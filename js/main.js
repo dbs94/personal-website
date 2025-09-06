@@ -20,7 +20,7 @@ const loadComponent = async (url, elementId) => {
 // --- NAVIGATION CONFIGURATION ---
 // ======================================
 
-// The one true order for all art series pages
+// Art series order
 const artSeriesOrder = [
     'f24',
     'wax-on-paper',
@@ -29,7 +29,15 @@ const artSeriesOrder = [
     '06oct24'
 ];
 
-// Simplified navConfig, with all repetitive art series pages removed
+// Blog post order
+const blogPostOrder = [
+    'on-the-process-of-creation',
+    'finding-inspiration',
+    'a-look-at-f24'
+    // Add new blog post slugs here as you write them
+];
+
+// Simplified navConfig, with all dynamic pages removed
 const navConfig = {
     'page-home': {
         topLeft: { text: 'ART', href: '/pages/art/index.html' },
@@ -49,12 +57,6 @@ const navConfig = {
         bottomLeft: { text: 'BLOG', href: '/pages/blog/index.html', active: true },
         bottomRight: { text: 'OTHER', href: '/index.html' },
     },
-    'page-blog-post': {
-        topLeft: { text: 'ART', href: '/pages/art/index.html' },
-        topRight: { text: 'ABOUT', href: '/pages/about.html' },
-        bottomLeft: { text: 'BLOG', href: '/pages/blog/index.html', active: true },
-        bottomRight: { text: 'OTHER', href: '/index.html' },
-    },
     'page-about': {
         topLeft: { text: 'ART', href: '/pages/art/index.html' },
         topRight: { text: 'ABOUT', href: '/pages/about.html', active: true },
@@ -69,30 +71,48 @@ const navConfig = {
 
 const configureNavigation = () => {
     const pageId = document.body.id;
-    let pageConfig; // Use 'let' so we can modify it
+    let pageConfig;
 
-    // --- NEW: DYNAMIC LOGIC FOR ART SERIES PAGES ---
-   if (pageId && pageId.startsWith('page-art-') && pageId !== 'page-art-gallery') {
+    // Dynamic logic for Art Series pages
+    if (pageId && pageId.startsWith('page-art-') && pageId !== 'page-art-gallery') {
         const currentSlug = pageId.replace('page-art-', '');
         const currentIndex = artSeriesOrder.indexOf(currentSlug);
 
         if (currentIndex !== -1) {
             const prevIndex = (currentIndex - 1 + artSeriesOrder.length) % artSeriesOrder.length;
             const nextIndex = (currentIndex + 1) % artSeriesOrder.length;
-
             const prevSlug = artSeriesOrder[prevIndex];
             const nextSlug = artSeriesOrder[nextIndex];
 
-            // Dynamically build the configuration for this art page
             pageConfig = {
                 topLeft: { text: 'ART', href: '/pages/art/index.html' },
-                topRight: { text: currentSlug.toUpperCase(), href: '#', active: true },
+                topRight: { text: currentSlug.toUpperCase().replace('-', ' '), href: '#', active: true },
                 bottomLeft: { text: 'PREVIOUS', href: `/pages/art/${prevSlug}.html` },
                 bottomRight: { text: 'NEXT', href: `/pages/art/${nextSlug}.html` }
             };
         }
+    
+    // NEW: Dynamic logic for Blog Post pages
+    } else if (pageId && pageId.startsWith('page-blog-') && pageId !== 'page-blog-gallery') {
+        const currentSlug = pageId.replace('page-blog-', '');
+        const currentIndex = blogPostOrder.indexOf(currentSlug);
+
+        if (currentIndex !== -1) {
+            const prevIndex = (currentIndex - 1 + blogPostOrder.length) % blogPostOrder.length;
+            const nextIndex = (currentIndex + 1) % blogPostOrder.length;
+            const prevSlug = blogPostOrder[prevIndex];
+            const nextSlug = blogPostOrder[nextIndex];
+
+            pageConfig = {
+                topLeft: { text: 'ART', href: '/pages/art/index.html' },
+                topRight: { text: 'ABOUT', href: '/pages/about.html' },
+                bottomLeft: { text: 'PREVIOUS POST', href: `/pages/blog/posts/${prevSlug}.html` },
+                bottomRight: { text: 'NEXT POST', href: `/pages/blog/posts/${nextSlug}.html` }
+            };
+        }
+
+    // Original logic for all other static pages
     } else {
-        // --- ORIGINAL LOGIC for all other pages ---
         pageConfig = navConfig[pageId];
     }
 
@@ -117,6 +137,7 @@ const configureNavigation = () => {
     updateLink('nav-bottom-left', pageConfig.bottomLeft);
     updateLink('nav-bottom-right', pageConfig.bottomRight);
 };
+
 
 document.addEventListener('DOMContentLoaded', async () => {
     await Promise.all([
