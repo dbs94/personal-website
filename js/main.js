@@ -31,7 +31,7 @@ const artSeriesOrder = [
 
 // Blog post order
 const blogPostOrder = [
-    'on-the-process-of-creation',
+    'blog-post-template',
     'finding-inspiration',
     'a-look-at-f24'
     // Add new blog post slugs here as you write them
@@ -104,8 +104,8 @@ const configureNavigation = () => {
             const nextSlug = blogPostOrder[nextIndex];
 
             pageConfig = {
-                topLeft: { text: 'ART', href: '/pages/art/index.html' },
-                topRight: { text: 'ABOUT', href: '/pages/about.html' },
+                topLeft: { text: 'BLOG', href: '/pages/blog/index.html' },
+                topRight: { text: currentSlug.toUpperCase().replace('-', ' '), href: '#', active: true },
                 bottomLeft: { text: 'PREVIOUS POST', href: `/pages/blog/posts/${prevSlug}.html` },
                 bottomRight: { text: 'NEXT POST', href: `/pages/blog/posts/${nextSlug}.html` }
             };
