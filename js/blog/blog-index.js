@@ -21,19 +21,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Loop through the data and generate an HTML card for each post
     sortedPosts.forEach(post => {
-        // --- THIS IS THE UPDATED HTML STRUCTURE ---
-        const postCardHTML = `
-            <a href="/pages/blog/blog-posts/${post.slug}.html" class="blog-grid-item">
-                <div class="blog-item-image-container">
-                    <img src="${post.heroImage}" alt="Hero image for ${post.title}">
-                </div>
-                <div class="blog-item-caption">
-                    <h2>${post.title}</h2>
-                    <p class="post-date">${new Date(post.date).toLocaleDateString('en-GB', {day: 'numeric', month: 'long', year: 'numeric'})}</p>
-                </div>
-            </a>
-        `;
-        // Add the new HTML to the page
-        container.innerHTML += postCardHTML;
+    const postCardHTML = `
+        <a href="/pages/blog/posts/${post.slug}.html" class="blog-grid-item">
+            <div class="blog-item-image-container">
+                <img 
+                    srcset="
+                        ${post.heroImage.small} 400w,
+                        ${post.heroImage.medium} 800w,
+                        ${post.heroImage.large} 1200w"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    src="${post.heroImage.medium}" 
+                    alt="Hero image for ${post.title}"
+                    loading="lazy">
+            </div>
+            <div class="blog-item-caption">
+                <h2>${post.title}</h2>
+                <p class="post-date">${new Date(post.date).toLocaleDateString('en-GB', {day: 'numeric', month: 'long', year: 'numeric'})}</p>
+            </div>
+        </a>
+    `;
+    container.innerHTML += postCardHTML;
     });
 });

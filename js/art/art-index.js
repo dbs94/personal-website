@@ -4,7 +4,7 @@
  * =================================================================
  * This script dynamically builds the art gallery grid page.
  * It takes the data from `art-series-data.js` and generates
- * the HTML for each series cover.
+ * the HTML for each series cover, including responsive images.
  * =================================================================
  */
 document.addEventListener('DOMContentLoaded', () => {
@@ -12,14 +12,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!artGrid) return;
 
     // Optional: Sort series by year, newest first.
-    // You can remove this line if you prefer the order from the data file.
     const sortedSeries = artSeries.sort((a, b) => b.year - a.year);
 
     sortedSeries.forEach(series => {
         const gridItemHTML = `
             <div class="grid-item">
                 <a href="/pages/art/${series.slug}.html">
-                    <img src="${series.coverImage}" alt="${series.altText}">
+                    <img 
+                        srcset="
+                            ${series.coverImage.small} 400w,
+                            ${series.coverImage.medium} 800w,
+                            ${series.coverImage.large} 1200w"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        src="${series.coverImage.medium}" 
+                        alt="${series.altText}"
+                        loading="lazy">
                 </a>
             </div>
         `;
