@@ -251,7 +251,7 @@ body.homepage {
 /* --- Blog Post --- */
 
 .blog-post-container article {
-    max-width: 85ch;
+    max-width: 65ch;
     margin-inline: auto;
 }
 
@@ -285,7 +285,7 @@ body.homepage {
 }
 
 .blog-post-content {
-    font-size: 1rem;
+    font-size: 0.9rem;
     line-height: 1.7;
 }
 

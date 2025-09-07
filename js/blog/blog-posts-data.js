@@ -29,9 +29,9 @@ const blogPosts = [
     },
 
     {
-        slug: 'finding-inspiration',
-        title: 'Finding Inspiration in Unlikely Places',
-        date: '2025-08-22',
+        slug: 'the-first-step',
+        title: 'The First Step',
+        date: '2024-11-20',
         description: 'How to break out of a creative rut by looking for inspiration beyond the studio walls.',
         heroImage: {
             small: '/images/blog-images/inspiration-photo-400w.webp',
