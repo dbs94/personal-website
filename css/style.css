@@ -175,6 +175,8 @@ body.homepage {
     margin-block-end: var(--spacing-l);
 }
 .artwork-piece img {
+    width: 100%; /* <-- THE FIX */
+    height: auto; /* Keeps the aspect ratio correct */
     margin-block-end: var(--spacing-s);
 }
 
