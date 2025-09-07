@@ -20,16 +20,6 @@ const loadComponent = async (url, elementId) => {
 // --- NAVIGATION CONFIGURATION ---
 // ======================================
 
-// Art series order
-const artSeriesOrder = [
-    // Add new art slugs here as I make them
-    'f24',
-    'wax-on-paper',
-    'breaking-points',
-    'sm24',
-    '06oct24'
-];
-
 
 // navConfig
 const navConfig = {
@@ -64,6 +54,12 @@ const navConfig = {
 // ==============================
 
 const configureNavigation = () => {
+
+       let artSeriesOrder = [];
+    if (typeof artSeries !== 'undefined') {
+        // Create the order directly from the data file
+        artSeriesOrder = artSeries.map(series => series.slug);
+    }
 
     let blogPostOrder = [];
     if (typeof blogPosts !== 'undefined') {
