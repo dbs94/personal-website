@@ -34,9 +34,9 @@ const blogPosts = [
         date: '2024-11-20',
         description: 'How to break out of a creative rut by looking for inspiration beyond the studio walls.',
         heroImage: {
-            small: '/images/blog-images/inspiration-photo-400w.webp',
-            medium: '/images/blog-images/inspiration-photo-800w.webp',
-            large: '/images/blog-images/inspiration-photo-1200w.webp'
+            small: '/images/blog-images/the-first-step-blog-post-dylan-burnside-smith-400w.webp',
+            medium: '/images/blog-images/the-first-step-blog-post-dylan-burnside-smith-800w.webp',
+            large: '/images/blog-images/the-first-step-blog-post-dylan-burnside-smith-1200w.webp'
         },
         tags: ['creativity', 'inspiration']
     }
