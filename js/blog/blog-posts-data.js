@@ -15,6 +15,20 @@
 const blogPosts = [
 
     // Add new blog post objects here as I write them
+
+    {
+        slug: 'the-sixth-sense',
+        title: 'The Sixth Sense',
+        date: '2024-11-27',
+        description: 'A deep dive into the concepts and techniques behind the F24 series of works on paper.',
+        heroImage: {
+            small: '/images/blog-images/the-sixth-sense-blog-post-dylan-burnside-smith-400w.webp',
+            medium: '/images/blog-images/the-sixth-sense-blog-post-dylan-burnside-smith-800w.webp',
+            large: '/images/blog-images/the-sixth-sense-blog-post-dylan-burnside-smith-1200w.webp'
+        },
+        tags: ['creativity', 'imagination', 'the senses']
+    },
+
     {
         slug: 'blog-post-template',
         title: 'A Look at the F24 Art Series',
@@ -38,7 +52,7 @@ const blogPosts = [
             medium: '/images/blog-images/the-first-step-blog-post-dylan-burnside-smith-800w.webp',
             large: '/images/blog-images/the-first-step-blog-post-dylan-burnside-smith-1200w.webp'
         },
-        tags: ['creativity', 'inspiration']
-    }
+        tags: ['creativity', 'inspiration', 'writing']
+    },
 
 ];
