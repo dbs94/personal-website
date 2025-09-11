@@ -229,7 +229,7 @@ const artSeries = [
         altText: "Cover art for the 'Wax on Paper' series. A highly textured abstract image that reveals the marks created by the paper's folds. The fold marks have been revealed by using wax crayons in a frottage effect.",
         pieces: [
             {
-                title: 'No.1, Wax On Paper',
+                title: 'No.1, Wax on Paper',
                 year: 2024,
                 dimensions: '59.4 x 42 cm',
                 editions: '1 of 5',
@@ -241,7 +241,7 @@ const artSeries = [
                 altText: "No.1 from the Wax on Paper series. A textured abstract artwork created using a wax frottage technique on scrunched paper. The process reveals the paper's unique network of creases and folds, capturing the interplay between chaos and control."
             },
             {
-                title: 'No.2, Wax On Paper',
+                title: 'No.2, Wax on Paper',
                 year: 2024,
                 dimensions: '59.4 x 42 cm',
                 editions: '1 of 5',
@@ -253,7 +253,7 @@ const artSeries = [
                 altText: "No.2 from the Wax on Paper series. A textured abstract artwork created using a wax frottage technique on scrunched paper. The process reveals the paper's unique network of creases and folds, capturing the interplay between chaos and control."
             },
             {
-                title: 'No.3, Wax On Paper',
+                title: 'No.3, Wax on Paper',
                 year: 2024,
                 dimensions: '59.4 x 42 cm',
                 editions: '1 of 5',
@@ -265,7 +265,7 @@ const artSeries = [
                 altText: "No.3 from the Wax on Paper series. A textured abstract artwork created using a wax frottage technique on scrunched paper. The process reveals the paper's unique network of creases and folds, capturing the interplay between chaos and control."
             },
             {
-                title: 'No.4, Wax On Paper',
+                title: 'No.4, Wax on Paper',
                 year: 2024,
                 dimensions: '59.4 x 42 cm',
                 editions: '1 of 5',
@@ -277,7 +277,7 @@ const artSeries = [
                 altText: "No.4 from the Wax on Paper series. A textured abstract artwork created using a wax frottage technique on scrunched paper. The process reveals the paper's unique network of creases and folds, capturing the interplay between chaos and control."
             },
             {
-                title: 'No.5, Wax On Paper',
+                title: 'No.5, Wax on Paper',
                 year: 2024,
                 dimensions: '59.4 x 42 cm',
                 editions: '1 of 5',
@@ -289,7 +289,7 @@ const artSeries = [
                 altText: "No.5 from the Wax on Paper series. A textured abstract artwork created using a wax frottage technique on scrunched paper. The process reveals the paper's unique network of creases and folds, capturing the interplay between chaos and control."
             },
             {
-                title: 'No.6, Wax On Paper',
+                title: 'No.6, Wax on Paper',
                 year: 2024,
                 dimensions: '59.4 x 42 cm',
                 editions: '1 of 5',
@@ -301,7 +301,7 @@ const artSeries = [
                 altText: "No.6 from the Wax on Paper series. A textured abstract artwork created using a wax frottage technique on scrunched paper. The process reveals the paper's unique network of creases and folds, capturing the interplay between chaos and control."
             },
             {
-                title: 'No.7, Wax On Paper',
+                title: 'No.7, Wax on Paper',
                 year: 2024,
                 dimensions: '59.4 x 42 cm',
                 editions: '1 of 5',
@@ -313,7 +313,7 @@ const artSeries = [
                 altText: "No.7 from the Wax on Paper series. A textured abstract artwork created using a wax frottage technique on scrunched paper. The process reveals the paper's unique network of creases and folds, capturing the interplay between chaos and control."
             },
             {
-                title: 'No.8, Wax On Paper',
+                title: 'No.8, Wax on Paper',
                 year: 2024,
                 dimensions: '59.4 x 42 cm',
                 editions: '1 of 5',
@@ -325,7 +325,7 @@ const artSeries = [
                 altText: "No.8 from the Wax on Paper series. A textured abstract artwork created using a wax frottage technique on scrunched paper. The process reveals the paper's unique network of creases and folds, capturing the interplay between chaos and control."
             },
             {
-                title: 'No.9, Wax On Paper',
+                title: 'No.9, Wax on Paper',
                 year: 2024,
                 dimensions: '59.4 x 42 cm',
                 editions: '1 of 5',
@@ -337,7 +337,7 @@ const artSeries = [
                 altText: "No.9 from the Wax on Paper series. A textured abstract artwork created using a wax frottage technique on scrunched paper. The process reveals the paper's unique network of creases and folds, capturing the interplay between chaos and control."
             },
             {
-                title: 'No.10, Wax On Paper',
+                title: 'No.10, Wax on Paper',
                 year: 2024,
                 dimensions: '59.4 x 42 cm',
                 editions: '1 of 5',
@@ -349,7 +349,7 @@ const artSeries = [
                 altText: "No.10 from the Wax on Paper series. A textured abstract artwork created using a wax frottage technique on scrunched paper. The process reveals the paper's unique network of creases and folds, capturing the interplay between chaos and control."
             },
             {
-                title: 'No.11, Wax On Paper',
+                title: 'No.11, Wax on Paper',
                 year: 2024,
                 dimensions: '59.4 x 42 cm',
                 editions: '1 of 5',
@@ -361,7 +361,7 @@ const artSeries = [
                 altText: "No.11 from the Wax on Paper series. A textured abstract artwork created using a wax frottage technique on scrunched paper. The process reveals the paper's unique network of creases and folds, capturing the interplay between chaos and control."
             },
             {
-                title: 'No.12, Wax On Paper',
+                title: 'No.12, Wax on Paper',
                 year: 2024,
                 dimensions: '59.4 x 42 cm',
                 editions: '1 of 5',
@@ -373,7 +373,7 @@ const artSeries = [
                 altText: "No.12 from the Wax on Paper series. A textured abstract artwork created using a wax frottage technique on scrunched paper. The process reveals the paper's unique network of creases and folds, capturing the interplay between chaos and control."
             },
             {
-                title: 'No.13, Wax On Paper',
+                title: 'No.13, Wax on Paper',
                 year: 2024,
                 dimensions: '59.4 x 42 cm',
                 editions: '1 of 5',
@@ -385,7 +385,7 @@ const artSeries = [
                 altText: "No.13 from the Wax on Paper series. A textured abstract artwork created using a wax frottage technique on scrunched paper. The process reveals the paper's unique network of creases and folds, capturing the interplay between chaos and control."
             },
             {
-                title: 'No.14, Wax On Paper',
+                title: 'No.14, Wax on Paper',
                 year: 2024,
                 dimensions: '59.4 x 42 cm',
                 editions: '1 of 5',
@@ -397,7 +397,7 @@ const artSeries = [
                 altText: "No.14 from the Wax on Paper series. A textured abstract artwork created using a wax frottage technique on scrunched paper. The process reveals the paper's unique network of creases and folds, capturing the interplay between chaos and control."
             },
             {
-                title: 'No.15, Wax On Paper',
+                title: 'No.15, Wax on Paper',
                 year: 2024,
                 dimensions: '59.4 x 42 cm',
                 editions: '1 of 5',
