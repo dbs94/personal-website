@@ -1,35 +1,56 @@
-/**
- * =================================================================
- * ART GALLERY PAGE BUILDER
- * =================================================================
- * This script dynamically builds the art gallery grid page.
- * It takes the data from `art-series-data.js` and generates
- * the HTML for each series cover, including responsive images.
- * =================================================================
- */
-document.addEventListener('DOMContentLoaded', () => {
-    const artGrid = document.getElementById('artGrid');
-    if (!artGrid) return;
+// js/art-index.js
 
-    // Optional: Sort series by year, newest first.
-    const sortedSeries = artSeries.sort((a, b) => b.year - a.year);
+import { client } from '../sanityClient.js';
+import imageUrlBuilder from 'https://esm.sh/@sanity/image-url';
 
-    sortedSeries.forEach(series => {
-        const gridItemHTML = `
-            <div class="grid-item">
-                <a href="/pages/art/${series.slug}.html">
-                    <img 
-                        srcset="
-                            ${series.coverImage.small} 400w,
-                            ${series.coverImage.medium} 800w,
-                            ${series.coverImage.large} 1200w"
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        src="${series.coverImage.medium}" 
-                        alt="${series.altText}"
-                        loading="lazy">
-                </a>
-            </div>
+// 1. Set up the helper to generate image URLs
+const builder = imageUrlBuilder(client);
+function urlFor(source) {
+  return builder.image(source);
+}
+
+// 2. Define the query to fetch the data
+// GROQ (Graph-Relational Object Queries) is Sanity's query language.
+const query = `*[_type == "artSeries"] | order(year desc) {
+  title,
+  "slug": slug.current,
+  coverImage {
+    asset,
+    alt
+  }
+}`;
+
+// 3. Get the container element
+const artGrid = document.getElementById('artGrid');
+if (artGrid) {
+  // 4. Fetch the data from Sanity
+  client.fetch(query).then(seriesList => {
+
+    console.log('Data received from Sanity:', seriesList); // <--- ADD THIS LINE
+
+    // 5. If we get data back, build the HTML
+    if (seriesList && seriesList.length > 0) {
+      const allGridItemsHTML = seriesList.map(series => {
+        // Build the HTML for a single grid item
+        return `
+          <div class="grid-item">
+            <a href="/pages/art/series.html?slug=${series.slug}">
+              <img
+                srcset="
+                  ${urlFor(series.coverImage).width(400).url()} 400w,
+                  ${urlFor(series.coverImage).width(800).url()} 800w,
+                  ${urlFor(series.coverImage).width(1200).url()} 1200w"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                src="${urlFor(series.coverImage).width(800).url()}"
+                alt="${series.coverImage.alt}"
+                loading="lazy">
+            </a>
+          </div>
         `;
-        artGrid.innerHTML += gridItemHTML;
-    });
-});
+      }).join('');
+      
+      // 6. Add the generated HTML to the grid
+      artGrid.innerHTML = allGridItemsHTML;
+    }
+  });
+}

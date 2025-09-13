@@ -1,87 +1,76 @@
-// ART DETAIL
+// js/art/art-detail.js
 
-// Function to render the header safely
-function renderSeriesHeader(series, headerElement) {
-    // Clear previous content
-    headerElement.innerHTML = ''; 
+import { client } from '../sanityClient.js';
+import imageUrlBuilder from 'https://esm.sh/@sanity/image-url';
 
-    const title = document.createElement('h1');
-    title.textContent = series.title;
-
-    const description = document.createElement('p');
-    description.textContent = series.description;
-
-    headerElement.append(title, description);
+// Set up the helper to generate image URLs
+const builder = imageUrlBuilder(client);
+function urlFor(source) {
+  return builder.image(source);
 }
 
-// Function to create a single artwork piece element
-function createPieceElement(piece) {
-    const pieceDiv = document.createElement('div');
-    pieceDiv.className = 'artwork-piece';
+// 1. Get the slug from the URL
+// --------------------------------
+const params = new URLSearchParams(window.location.search);
+const slug = params.get('slug');
 
-    const image = document.createElement('img');
-    image.srcset = `
-        ${piece.image.small} 400w,
-        ${piece.image.medium} 800w,
-        ${piece.image.large} 1200w
-    `;
-    image.sizes = '(max-width: 768px) 100vw, 80vw';
-    image.src = piece.image.medium;
-    image.alt = piece.altText;
-    image.loading = 'lazy';
+
+// 2. Write the query to get the specific art series
+// --------------------------------
+// We use the '$slug' variable to pass the slug from the URL into the query.
+// The [0] at the end tells Sanity to give us just the one matching document, not an array.
+const query = `*[_type == "artSeries" && slug.current == $slug][0] {
+  title,
+  description,
+  pieces[] {
+    title,
+    year,
+    dimensions,
+    editions,
+    image {
+      asset,
+      alt
+    }
+  }
+}`;
+
+
+// 3. Fetch the data and build the page
+// --------------------------------
+if (slug) {
+  // Pass the slug variable into the fetch query
+  client.fetch(query, { slug }).then(series => {
     
-    const metaDiv = document.createElement('div');
-    metaDiv.className = 'artwork-meta';
-    
-    // Using a helper to create meta paragraphs to reduce repetition
-    const createMetaP = (label, value) => {
-        const p = document.createElement('p');
-        const strong = document.createElement('strong');
-        strong.textContent = `${label}: `;
-        p.append(strong, document.createTextNode(value));
-        return p;
-    };
+    // Find our empty placeholder elements in the HTML
+    const headerElement = document.querySelector('.artwork-header');
+    const displayElement = document.querySelector('.artwork-display');
 
-    metaDiv.append(
-        createMetaP('Title', piece.title),
-        createMetaP('Year', piece.year),
-        createMetaP('Dimensions', piece.dimensions),
-        createMetaP('Editions', piece.editions)
-    );
+    if (series && headerElement && displayElement) {
+      // --- A. Populate the Header ---
+      document.title = `${series.title} / Dylan Burnside-Smith`; // Update the page title
+      const headerContent = `
+        <h1>${series.title}</h1>
+        <p>${series.description}</p>
+      `;
+      headerElement.innerHTML = headerContent;
 
-    pieceDiv.append(image, metaDiv);
-    return pieceDiv;
+      // --- B. Populate the Artwork Display ---
+      const piecesHTML = series.pieces.map(piece => `
+        <div class="artwork-piece">
+          <img 
+            src="${urlFor(piece.image).width(800).url()}" 
+            alt="${piece.image.alt}" 
+            loading="lazy">
+          <div class="artwork-meta">
+            <p><strong>Title:</strong> ${piece.title}</p>
+            <p><strong>Year:</strong> ${piece.year}</p>
+            <p><strong>Dimensions:</strong> ${piece.dimensions}</p>
+            <p><strong>Editions:</strong> ${piece.editions}</p>
+          </div>
+        </div>
+      `).join('');
+      displayElement.innerHTML = piecesHTML;
+    }
+
+  });
 }
-
-// Main logic
-document.addEventListener('DOMContentLoaded', () => {
-    const pageId = document.body.id;
-    if (!pageId || !pageId.startsWith('page-art-')) return;
-    
-    const currentSlug = pageId.replace('page-art-', '');
-    const series = artSeries.find(s => s.slug === currentSlug);
-
-    if (!series) {
-        console.error(`Art series with slug '${currentSlug}' not found.`);
-        return;
-    }
-
-    const header = document.querySelector('.artwork-header');
-    if (header) {
-        renderSeriesHeader(series, header);
-    }
-
-    const display = document.querySelector('.artwork-display');
-    if (display && series.pieces) {
-        // Use a DocumentFragment for performance
-        const fragment = document.createDocumentFragment();
-        series.pieces.forEach(piece => {
-            const pieceElement = createPieceElement(piece);
-            fragment.appendChild(pieceElement);
-        });
-
-        // Clear previous content and append the fragment in one operation
-        display.innerHTML = '';
-        display.appendChild(fragment);
-    }
-});

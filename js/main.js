@@ -1,147 +1,114 @@
+// js/main.js
+
+import { client } from './sanityClient.js';
+
 const loadComponent = async (url, elementId) => {
-    try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`Failed to fetch ${url}: ${response.statusText}`);
-        }
-        const text = await response.text();
-        const element = document.getElementById(elementId);
-        if (element) {
-            element.innerHTML = text;
-        } else {
-            console.error(`Element with ID '${elementId}' not found.`);
-        }
-    } catch (error) {
-        console.error('Error loading component:', error);
-    }
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`Failed to fetch ${url}`);
+    const text = await response.text();
+    const element = document.getElementById(elementId);
+    if (element) element.innerHTML = text;
+  } catch (error) {
+    console.error('Error loading component:', error);
+  }
 };
 
-// ======================================
-// --- NAVIGATION CONFIGURATION ---
-// ======================================
-
-
-// navConfig
 const navConfig = {
-    'page-home': {
-        topLeft: { text: 'ART', href: '/pages/art/index.html' },
-        topRight: { text: 'ABOUT', href: '/pages/about.html' },
-        bottomLeft: { text: 'BLOG', href: '/pages/blog/index.html' },
-        bottomRight: { text: 'OTHER', href: '/index.html' },
-    },
-    'page-art-gallery': {
-        topLeft: { text: 'ART', href: '/pages/art/index.html', active: true },
-        topRight: { text: 'ABOUT', href: '/pages/about.html' },
-        bottomLeft: { text: 'BLOG', href: '/pages/blog/index.html' },
-        bottomRight: { text: 'OTHER', href: '/index.html' },
-    },
-    'page-blog-gallery': {
-        topLeft: { text: 'ART', href: '/pages/art/index.html' },
-        topRight: { text: 'ABOUT', href: '/pages/about.html' },
-        bottomLeft: { text: 'BLOG', href: '/pages/blog/index.html', active: true },
-        bottomRight: { text: 'OTHER', href: '/index.html' },
-    },
-    'page-about': {
-        topLeft: { text: 'ART', href: '/pages/art/index.html' },
-        topRight: { text: 'ABOUT', href: '/pages/about.html', active: true },
-        bottomLeft: { text: 'BLOG', href: '/pages/blog/index.html' },
-        bottomRight: { text: 'OTHER', href: '/index.html' },
-    }
+  'page-home': {
+    topLeft: { text: 'ART', href: '/pages/art/' },
+    topRight: { text: 'ABOUT', href: '/about.html' },
+    bottomLeft: { text: 'BLOG', href: '/pages/blog/' },
+    bottomRight: { text: 'OTHER', href: '#' },
+  },
+  'page-art-gallery': {
+    topLeft: { text: 'ART', href: '/pages/art/', active: true },
+    topRight: { text: 'ABOUT', href: '/about.html' },
+    bottomLeft: { text: 'BLOG', href: '/pages/blog/' },
+    bottomRight: { text: 'OTHER', href: '#' },
+  },
+  'page-blog-gallery': {
+    topLeft: { text: 'ART', href: '/pages/art/' },
+    topRight: { text: 'ABOUT', href: '/about.html' },
+    bottomLeft: { text: 'BLOG', href: '/pages/blog/', active: true },
+    bottomRight: { text: 'OTHER', href: '#' },
+  },
+  'page-about': {
+    topLeft: { text: 'ART', href: '/pages/art/' },
+    topRight: { text: 'ABOUT', href: '/about.html', active: true },
+    bottomLeft: { text: 'BLOG', href: '/pages/blog/' },
+    bottomRight: { text: 'OTHER', href: '#' },
+  }
 };
 
-// ==============================
-// --- NAVIGATION LINK SET-UP ---
-// ==============================
+const configureNavigation = async () => {
+  const pageId = document.body.id;
+  let pageConfig;
 
-const configureNavigation = () => {
-
-       let artSeriesOrder = [];
-    if (typeof artSeries !== 'undefined') {
-        // Create the order directly from the data file
-        artSeriesOrder = artSeries.map(series => series.slug);
-    }
-
-    let blogPostOrder = [];
-    if (typeof blogPosts !== 'undefined') {
-        // Sort by date to ensure "previous" and "next" are chronological
-        const sortedPosts = blogPosts.sort((a, b) => new Date(a.date) - new Date(b.date));
-        blogPostOrder = sortedPosts.map(post => post.slug);
-    }
-
-    const pageId = document.body.id;
-    let pageConfig;
-
-    // Dynamic logic for Art Series pages
-    if (pageId && pageId.startsWith('page-art-') && pageId !== 'page-art-gallery') {
-        const currentSlug = pageId.replace('page-art-', '');
-        const currentIndex = artSeriesOrder.indexOf(currentSlug);
-
-        if (currentIndex !== -1) {
-            const prevIndex = (currentIndex - 1 + artSeriesOrder.length) % artSeriesOrder.length;
-            const nextIndex = (currentIndex + 1) % artSeriesOrder.length;
-            const prevSlug = artSeriesOrder[prevIndex];
-            const nextSlug = artSeriesOrder[nextIndex];
-
-            pageConfig = {
-                topLeft: { text: 'ART', href: '/pages/art/index.html' },
-                topRight: { text: currentSlug.toUpperCase().replace(/-/g, ' '), href: '#', active: true },
-                bottomLeft: { text: 'PREVIOUS', href: `/pages/art/${prevSlug}.html` },
-                bottomRight: { text: 'NEXT', href: `/pages/art/${nextSlug}.html` }
-            };
-        }
+  // NEW LOGIC for Art Series Detail pages
+  if (pageId === 'page-art-series-detail') {
+    // 1. Fetch the correct order of all series slugs from Sanity
+    const artSeriesOrder = await client.fetch(`*[_type == "artSeries"] | order(year desc).slug.current`);
     
-    // Dynamic logic for Blog Post pages
-    } else if (pageId && pageId.startsWith('page-blog-') && pageId !== 'page-blog-gallery') {
-        const currentSlug = pageId.replace('page-blog-', '');
-        const currentIndex = blogPostOrder.indexOf(currentSlug);
+    // 2. Get the current slug from the URL parameter
+    const params = new URLSearchParams(window.location.search);
+    const currentSlug = params.get('slug');
 
-        if (currentIndex !== -1) {
-            const prevIndex = (currentIndex - 1 + blogPostOrder.length) % blogPostOrder.length;
-            const nextIndex = (currentIndex + 1) % blogPostOrder.length;
-            const prevSlug = blogPostOrder[prevIndex];
-            const nextSlug = blogPostOrder[nextIndex];
+    if (currentSlug && artSeriesOrder.length > 0) {
+      const currentIndex = artSeriesOrder.indexOf(currentSlug);
+      if (currentIndex !== -1) {
+        const prevIndex = (currentIndex - 1 + artSeriesOrder.length) % artSeriesOrder.length;
+        const nextIndex = (currentIndex + 1) % artSeriesOrder.length;
+        const prevSlug = artSeriesOrder[prevIndex];
+        const nextSlug = artSeriesOrder[nextIndex];
+        
+        const seriesTitle = currentSlug.replace(/-/g, ' ').toUpperCase();
 
-            pageConfig = {
-                topLeft: { text: 'BLOG', href: '/pages/blog/index.html' },
-                topRight: { text: currentSlug.toUpperCase().replace(/-/g, ' '), href: '#', active: true },
-                bottomLeft: { text: 'PREVIOUS POST', href: `/pages/blog/posts/${prevSlug}.html` },
-                bottomRight: { text: 'NEXT POST', href: `/pages/blog/posts/${nextSlug}.html` }
-            };
-        }
-
-    // Original logic for all other static pages
-    } else {
-        pageConfig = navConfig[pageId];
+        pageConfig = {
+          topLeft: { text: 'ART', href: '/pages/art/' },
+          topRight: { text: seriesTitle, href: '#', active: true },
+          bottomLeft: { text: 'PREVIOUS', href: `/pages/art/series.html?slug=${prevSlug}` },
+          bottomRight: { text: 'NEXT', href: `/pages/art/series.html?slug=${nextSlug}` }
+        };
+      }
     }
+  
+  // Logic for Blog Post pages (we'll update this later)
+  } else if (pageId.startsWith('page-blog-') && pageId !== 'page-blog-gallery') {
+    // This part will need a similar update when we do the blog
+    pageConfig = navConfig['page-blog-gallery']; // Default for now
+  
+  // Original logic for all other static pages
+  } else {
+    pageConfig = navConfig[pageId];
+  }
 
-    if (!pageConfig) {
-        console.warn(`No navigation configuration found for page ID: ${pageId}`);
-        return;
+  if (!pageConfig) {
+    console.warn(`No navigation configuration found for page ID: ${pageId}`);
+    return;
+  }
+
+  const updateLink = (elementId, linkConfig) => {
+    const element = document.getElementById(elementId);
+    if (element && linkConfig) {
+      element.textContent = linkConfig.text || '';
+      element.href = linkConfig.href || '#';
+      if (linkConfig.active) element.classList.add('active');
     }
-    
-    const updateLink = (elementId, linkConfig) => {
-        const element = document.getElementById(elementId);
-        if (element && linkConfig) {
-            element.textContent = linkConfig.text || '';
-            element.href = linkConfig.href || '#';
-            if (linkConfig.active) {
-                element.classList.add('active');
-            }
-        }
-    };
+  };
 
-    updateLink('nav-top-left', pageConfig.topLeft);
-    updateLink('nav-top-right', pageConfig.topRight);
-    updateLink('nav-bottom-left', pageConfig.bottomLeft);
-    updateLink('nav-bottom-right', pageConfig.bottomRight);
+  updateLink('nav-top-left', pageConfig.topLeft);
+  updateLink('nav-top-right', pageConfig.topRight);
+  updateLink('nav-bottom-left', pageConfig.bottomLeft);
+  updateLink('nav-bottom-right', pageConfig.bottomRight);
 };
 
 
 document.addEventListener('DOMContentLoaded', async () => {
-    await Promise.all([
-        loadComponent('/components/_header.html', 'header-placeholder'),
-        loadComponent('/components/_footer.html', 'footer-placeholder')
-    ]);
+  await Promise.all([
+    loadComponent('/components/_header.html', 'header-placeholder'),
+    loadComponent('/components/_footer.html', 'footer-placeholder')
+  ]);
 
-    configureNavigation();
+  await configureNavigation();
 });
