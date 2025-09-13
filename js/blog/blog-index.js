@@ -1,45 +1,61 @@
-/**
- * =================================================================
- * BLOG INDEX PAGE BUILDER
- * =================================================================
- * This script dynamically builds the blog index page.
- *
- * It takes the data from `blog-posts-data.js`, sorts the posts by
- * date, and generates the HTML for each post card.
- *
- * I shouldn't need to edit this file unless I want to change
- * the layout of the blog index page itself.
- * =================================================================
- */
+// js/blog/blog-index.js
 
-document.addEventListener('DOMContentLoaded', () => {
-    const container = document.getElementById('blog-posts-container');
-    if (!container) return;
+import { client } from '../sanityClient.js';
+import imageUrlBuilder from 'https://esm.sh/@sanity/image-url';
 
-    // Sort posts by date, newest first
-    const sortedPosts = blogPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+// Set up the helper to generate image URLs
+const builder = imageUrlBuilder(client);
+function urlFor(source) {
+  return builder.image(source);
+}
 
-    // Loop through the data and generate an HTML card for each post
-    sortedPosts.forEach(post => {
-    const postCardHTML = `
-        <a href="/pages/blog/posts/${post.slug}.html" class="blog-grid-item">
+// Define the query to fetch blog posts
+const query = `*[_type == "blogPost"] | order(publishedAt desc) {
+  title,
+  "slug": slug.current,
+  publishedAt,
+  heroImage {
+    asset,
+    alt
+  },
+  excerpt
+}`;
+
+// Get the container element
+const container = document.getElementById('blog-posts-container');
+if (container) {
+  // Fetch the data from Sanity
+  client.fetch(query).then(posts => {
+
+    if (posts && posts.length > 0) {
+      const postsHTML = posts.map(post => {
+        // Format the date nicely
+        const postDate = new Date(post.publishedAt).toLocaleDateString('en-GB', {
+          day: 'numeric',
+
+          month: 'long',
+          year: 'numeric'
+        });
+
+        // Build the HTML for a single post card
+        return `
+          <a href="/pages/blog/post.html?slug=${post.slug}" class="blog-grid-item">
             <div class="blog-item-image-container">
-                <img 
-                    srcset="
-                        ${post.heroImage.small} 400w,
-                        ${post.heroImage.medium} 800w,
-                        ${post.heroImage.large} 1200w"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    src="${post.heroImage.medium}" 
-                    alt="Hero image for ${post.title}"
-                    loading="lazy">
+              <img
+                src="${urlFor(post.heroImage).width(800).url()}"
+                alt="${post.heroImage.alt}"
+                loading="lazy">
             </div>
             <div class="blog-item-caption">
-                <h2>${post.title}</h2>
-                <p class="post-date">${new Date(post.date).toLocaleDateString('en-GB', {day: 'numeric', month: 'long', year: 'numeric'})}</p>
+              <h2>${post.title}</h2>
+              <p class="post-date">${postDate}</p>
             </div>
-        </a>
-    `;
-    container.innerHTML += postCardHTML;
-    });
-});
+          </a>
+        `;
+      }).join('');
+
+      // Add the generated HTML to the container
+      container.innerHTML = postsHTML;
+    }
+  });
+}
