@@ -17,25 +17,25 @@ const loadComponent = async (url, elementId) => {
 const navConfig = {
   'page-home': {
     topLeft: { text: 'ART', href: '/pages/art/' },
-    topRight: { text: 'ABOUT', href: '/about.html' },
+    topRight: { text: 'ABOUT', href: '/pages/about.html' },
     bottomLeft: { text: 'BLOG', href: '/pages/blog/' },
     bottomRight: { text: 'OTHER', href: '#' },
   },
   'page-art-gallery': {
     topLeft: { text: 'ART', href: '/pages/art/', active: true },
-    topRight: { text: 'ABOUT', href: '/about.html' },
+    topRight: { text: 'ABOUT', href: '/pages/about.html' },
     bottomLeft: { text: 'BLOG', href: '/pages/blog/' },
     bottomRight: { text: 'OTHER', href: '#' },
   },
   'page-blog-gallery': {
     topLeft: { text: 'ART', href: '/pages/art/' },
-    topRight: { text: 'ABOUT', href: '/about.html' },
+    topRight: { text: 'ABOUT', href: '/pages/about.html' },
     bottomLeft: { text: 'BLOG', href: '/pages/blog/', active: true },
     bottomRight: { text: 'OTHER', href: '#' },
   },
   'page-about': {
     topLeft: { text: 'ART', href: '/pages/art/' },
-    topRight: { text: 'ABOUT', href: '/about.html', active: true },
+    topRight: { text: 'ABOUT', href: '/pages/about.html', active: true },
     bottomLeft: { text: 'BLOG', href: '/pages/blog/' },
     bottomRight: { text: 'OTHER', href: '#' },
   }
